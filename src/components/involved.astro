@@ -1,0 +1,126 @@
+---
+const cards = [
+  {
+    title: "UIUC DREAM Lab",
+    subtitle: "Developing Reliable and Efficient AI for Medicine",
+    buttonLabel: "Visit DREAM Lab",
+    buttonLink: "https://dreamlabuiuc.github.io/",
+    imageUrl: "https://raw.githubusercontent.com/haibojin001/Figure4user/main/uiucdream.png",
+    description: "Developing Reliable and Efficient AI for Medicine"
+  },
+  {
+    title: "Join The Community",
+    subtitle: "Join our community on Slack to discuss ideas, ask questions, and collaborate with new friends.",
+    buttonLabel: "Join Slack",
+    buttonLink: "https://join.slack.com/t/jailbreakdiscussion/shared_invite/zt-2tiegnqcm-KJ3hCwQkefR0ko7vleL7Hw",
+    imageUrl: "https://raw.githubusercontent.com/haibojin001/Figure4user/main/slack.jpg",
+  },
+  {
+    title: "Share Your Research Insights",
+    subtitle: "Provide us feedback by sharing insights or suggesting additional resources related to our study.",
+    buttonLabel: "Fill This Form",
+    buttonLink: "#",
+    imageUrl: "https://raw.githubusercontent.com/haibojin001/Figure4user/main/suggestions.png",
+  },
+  {
+    title: "Trustworthy ML Initiative",
+    subtitle: "The Trustworthy ML Initiative (TrustML) addresses challenges in responsible ML by providing resources, showcasing early career researchers, fostering discussions and building a community.",
+    buttonLabel: "More Info",
+    buttonLink: "https://www.trustworthyml.org/",
+    imageUrl: "https://raw.githubusercontent.com/haibojin001/Figure4user/main/TML.jpg",
+  }
+];
+---
+
+<section class="get-involved">
+  <div class="card-container">
+    {cards.map((card) => (
+      <div class="card">
+        <img src={card.imageUrl} alt={card.title} class="card-image" />
+        <div class="card-content">
+          <h3>{card.title}</h3>
+          <p>{card.subtitle}</p>
+          <a href={card.buttonLink} class="card-button">{card.buttonLabel}</a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .get-involved {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #f4f4f4;
+  }
+
+  .get-involved h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #333;
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  .card {
+    flex: 1;
+    max-width: 250px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .card h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin: 0 0 10px;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.4;
+  }
+
+  .card-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #d32f2f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .card-button:hover {
+    background-color: #b71c1c;
+  }
+</style>
