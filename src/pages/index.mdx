@@ -1,15 +1,16 @@
 ---
 layout: ../layouts/Layout.astro
-title: Academic Project Page Template
+title: Jailbreaking Large Language Models Against Moderation Guardrails via Cipher Characters
 description: Simple project page template for your research paper, built with Astro and Tailwind CSS
 favicon: favicon.svg
 thumbnail: screenshot.png
 ---
-
+import WarningWithCheckbox from '../components/Warnings.astro';
 import Layout from "../layouts/Layout.astro";
-
+import GetInvolved from "../components/involved.astro";
 import Header from "../components/Header.astro";
 import Video from "../components/Video.astro";
+import Example from '../components/Examples.astro';
 import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
 import Figure from "../components/Figure.astro";
@@ -17,138 +18,141 @@ import Image from "../components/Image.astro";
 import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
-
+import poster from "../assets/poster.PNG";
 import outside from "../assets/outside.mp4";
-import transformer from "../assets/transformer.webp";
+import intro1029 from "../assets/intro1029.png";
 import Splat from "../components/Splat.tsx"
 
 import CodeBlock from "../components/CodeBlock.astro";
-import Table from "../components/Table.astro";
-export const components = {pre: CodeBlock, table: Table}
+export const components = {pre: CodeBlock}
 
 <Header
   title={frontmatter.title}
   authors={[
     {
-      name: "Roman Hauksson",
-      url: "https://roman.technology",
-      institution: "Independent",
-      notes: ["*", "†"],
+      name: "Peiyan Zhang",
+      url: "https://peiyance.github.io/",
+      institution: "Department of Computer Science \n Hong Kong University of Science and Technology",
     },
     {
-      name: "Author Two",
-      institution: "Institution Two",
-      notes: ["*", "†"],
+      name: "Haibo Jin",
+      url: "https://haibojin001.github.io/",
+      institution: "School of Information Sciences \n University of Illinois at Urbana-Champaign",
     },
     {
-      name: "Author Three",
-      institution: "Institution Three",
-      notes: ["†"],
+      name: "Leyang Hu",
+      url: "https://github.com/Leon-Leyang",
+      institution: "Brown University",
     },
     {
-      name: "Author Four",
-      institution: "Institution Four",
+      name: "Xinnuo Li",
+      url: "https://github.com/monmonli",
+      institution: "University of Michigan - Ann Arbor",
+    },
+    {
+      name: "Liying Kang",
+      url: "https://openreview.net/profile?id=~Liying_Kang1",
+      institution: "Hong Kong Polytechnic University",
+    },
+    {
+      name: "Man Luo",
+      url: "https://luomancs.github.io/",
+      institution: "Intel Lab",
+    },
+    {
+      name: "Yangqiu Song",
+      url: "https://www.cse.ust.hk/~yqsong/",
+      institution: "Department of Computer Science \n Hong Kong University of Science and Technology",
+    },
+    {
+      name: "Haohan Wang",
+      url: "https://haohanwang.github.io/",
+      institution: "School of Information Sciences \n University of Illinois at Urbana-Champaign",
+      notes: ["*"],
     },
   ]}
-  conference="Conference Name"
   notes={[
     {
       symbol: "*",
-      text: "author note one",
-    },
-    {
-      symbol: "†",
-      text: "author note two",
+      text: "Corresponding Author",
     },
   ]}
   links={[
     {
       name: "Paper",
-      url: "",
+      url: "https://arxiv.org/pdf/2405.20413",
       icon: "fa-solid:file-pdf",
     },
     {
       name: "Code",
-      url: "https://github.com/RomanHauksson/academic-project-astro-template",
+      url: "https://github.com/Allen-piexl/llm_moderation_attack",
       icon: "mdi:github",
     },
     {
       name: "arXiv",
-      url: "",
+      url: "https://arxiv.org/abs/2405.20413",
       icon: "academicons:arxiv",
     },
   ]}
   />
 
-<Video source={outside} />
+ {/*<Video source={outside} />*/}
 
 <HighlightedSection>
 
 ## Abstract
 
-This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+Recent advancements in large language models (LLMs) have significantly enhanced the ability of LLM-based systems to perform complex tasks through natural language processing and tool interaction. However, optimizing these LLM-based systems for specific tasks remains challenging, often requiring manual interventions like prompt engineering and hyperparameter tuning.
+Existing automatic optimization methods, such as textual feedback-based techniques (e.g., TextGrad), tend to focus on immediate feedback, analogous to using immediate derivatives in traditional numerical gradient descent.
+However, relying solely on such feedback can be limited when the adjustments made in response to this feedback are either too small or fluctuate irregularly, potentially slowing down or even stalling the optimization process. 
+To overcome these challenges, more adaptive methods are needed, especially in situations where the system’s response is evolving slowly or unpredictably. In this paper, we introduce \textbf{Revolve}, a novel optimization method that tracks the Response evolution across iterations in LLM systems. By focusing on how responses evolve over time, Revolve enables more stable and effective optimization by making thoughtful, progressive adjustments at each step. We evaluate the effectiveness of Revolve across three tasks: prompt optimization, solution optimization, and code optimization. Experimental results demonstrate that HessianGrad consistently improves performance across all three tasks, achieving a 7.8% improvement in prompt optimization, a 20.72% gain in solution refinement, and a 29.17% increase in code optimization compared to baselines,
+highlighting its adaptability and effectiveness in optimizing LLM-based systems.
 
 </HighlightedSection>
 
-## Figures
 
-Use the figure component to display images, videos, equations, or any other element, with an optional caption.
+
+## Motivation
+
+Examples of jailbreaks. (a) A malicious question that receives a refusal response from the LLM. (b) An affirmative response with detailed steps to implement the malicious question by adding a jailbreak prompt as the prefix. (c) A filtered-out error is triggered by the moderation guardrail, even when a successful jailbreak prompt is added. (d) An affirmative response using JAM, which combines a jailbreak prefix, the malicious question, and the cipher characters to bypass the guardrail.
 
 <Figure
-    caption="Diagram of the transformer deep learning architecture."
+    caption=""
   >
-    <Image source={transformer} altText="Diagram of the transformer deep learning architecture." />
+    <Image source={intro1029} altText="Diagram of the transformer deep learning architecture." />
 </Figure>
 
-## Two columns
+## Examples
 
-Use the two columns component to display two columns of content. In this example, the first column contains a figure with a YouTube video and the second column contains a figure with a custom [React](https://react.dev/) component. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they're arranged vertically.
+<WarningWithCheckbox>
+  <Example />
+</WarningWithCheckbox>
+
+## Paper Showcase
+
+The presentation video on the left explains the problem addressed, our methodology, and key outcomes, helping viewers understand the broader impact of our work. On the right, the poster offers a visual summary of major findings and innovations, designed to capture the core essence of our research at a glance.
 
 <TwoColumns>
-  <Figure slot="left" caption="Take a look at this YouTube video.">
-    <YouTubeVideo videoId="wjZofJX0v4M" />
+  <Figure slot="left" caption="Watch our paper presentation video.">
+    <YouTubeVideo videoId="E2P6XKi6HMs" />
   </Figure>
-  <Figure slot="right" caption="Now look at this Gaussian Splat, rendered with a React component.">
-    <Splat client:idle />
+  <Figure slot="right" caption="Here is the poster for our paper.">
+    {/*<Splat client:idle />*/}
+   <Image source={poster} altText="Diagram of the transformer deep learning architecture." />
   </Figure>
 </TwoColumns>
 
-## Heading levels
 
-Use headings to divide your content into sections.
-
-### Heading 3
-
-Go down a level to heading 3...
-
-#### Heading 4
-
-...and down again to heading 4.
-
-## LaTeX
-
-You can also add LaTeX formulas, rendered during the build process using [KaTeX](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: <LaTeX inline formula="a^2 + b^2 = c^2" />. Or, you can write them as a block:
-
-<LaTeX formula="\int_a^b f(x) dx" />
-
-## Tables
-
-You can add simple tables using [GitHub Flavored Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables):
-
-| Model | Accuracy | F1 score | Training time (hours) |
-| :--- | :---: | :---: | :---: |
-| BERT-base | 0.89 | 0.87 | 4.5 |
-| RoBERTa-large | 0.92 | 0.91 | 7.2 |
-| DistilBERT | 0.86 | 0.84 | 2.1 |
-| XLNet | 0.90 | 0.89 | 6.8 |
+## Get Involved
+<GetInvolved />
 
 ## BibTeX citation
 
 ```bibtex
-@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\url{https://research-template.roman.technology}",
+@article{jin2024jailbreaking,
+  title={Jailbreaking Large Language Models Against Moderation Guardrails via Cipher Characters},
+  author={Jin, Haibo and Zhou, Andy and Menke, Joe D and Wang, Haohan},
+  journal={arXiv preprint arXiv:2405.20413},
+  year={2024}
 }
 ```
